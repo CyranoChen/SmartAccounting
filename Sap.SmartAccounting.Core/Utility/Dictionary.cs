@@ -4,7 +4,7 @@ using Sap.SmartAccounting.Core.Dapper;
 
 namespace Sap.SmartAccounting.Core
 {
-    [DbSchema("Dictionary", Sort = "ID")]
+    [DbSchema("Core_Dictionary", Sort = "ID")]
     public class DictionaryCategory : Entity<int>
     {
         public static class Cache
@@ -60,7 +60,7 @@ namespace Sap.SmartAccounting.Core
         #endregion
     }
 
-    [DbSchema("Arsenalcn_DictionaryItem", Sort = "OrderNum")]
+    [DbSchema("Core_DictionaryItem", Sort = "OrderNum")]
     public class DictionaryItem : Entity<int>
     {
         //public DictionaryItem(DataRow dr) : base(dr) { }

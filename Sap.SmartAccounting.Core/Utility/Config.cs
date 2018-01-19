@@ -7,7 +7,7 @@ using Sap.SmartAccounting.Core.Dapper;
 
 namespace Sap.SmartAccounting.Core
 {
-    [DbSchema("Config", Sort = "ConfigSystem, ConfigKey")]
+    [DbSchema("Core_Config", Sort = "ConfigSystem, ConfigKey")]
     public class Config : Dao
     {
         public Config() { }
@@ -191,10 +191,6 @@ namespace Sap.SmartAccounting.Core
 
     public enum ConfigSystem
     {
-        AcnClub,
-        AcnCasino,
-        // ReSharper disable once InconsistentNaming
-        iArsenal,
-        Arsenal
+        SmartAccounting
     }
 }

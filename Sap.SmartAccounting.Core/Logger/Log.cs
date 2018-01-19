@@ -8,7 +8,7 @@ using Sap.SmartAccounting.Core.Extension;
 
 namespace Sap.SmartAccounting.Core.Logger
 {
-    [DbSchema("Log", Sort = "ID DESC")]
+    [DbSchema("Core_Log", Sort = "ID DESC")]
     public class Log : Entity<int>
     {
         protected void Logging(string logger, DateTime createTime, LogLevel level, string message,

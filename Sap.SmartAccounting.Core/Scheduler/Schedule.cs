@@ -3,7 +3,7 @@ using System.Data;
 
 namespace Sap.SmartAccounting.Core.Scheduler
 {
-    [DbSchema("Schedule", Key = "ScheduleKey", Sort = "IsSystem, ScheduleKey")]
+    [DbSchema("Core_Schedule", Key = "ScheduleKey", Sort = "IsSystem, ScheduleKey")]
     public class Schedule : Dao
     {
         private ISchedule _ischedule;

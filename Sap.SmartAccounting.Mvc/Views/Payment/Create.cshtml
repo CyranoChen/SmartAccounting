@@ -1,0 +1,104 @@
+﻿@model Sap.SmartAccounting.Mvc.Models.PaymentDto
+@{
+    ViewBag.Title = "Add Test Payment Instance Manually";
+}
+
+@section Styles {
+    @*<link rel="stylesheet" href="~/Scripts/datepicker/datepicker3.css">*@
+}
+
+@section Scripts {
+    @*<script src="~/Scripts/datepicker/bootstrap-datepicker.js"></script>*@
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @*<script type="text/javascript">
+        $(function () {
+            $("#MenuDate").datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>*@
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            <b><i class="fa fa-calendar-minus-o"></i> Add Payment for TEST</b>
+            <small></small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Console</a></li>
+            <li><a href="#">Smart Matching</a></li>
+            <li class="active">Payment</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-info-circle"></i> Add TEST Payment Instance Manually
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                @using (Html.BeginForm("Create", "Payment", FormMethod.Post, new { id = "form-payment", @class = "form-horizontal" }))
+                {
+                    <div class="box-body">
+                        <!-- Date -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Company, new { @class = "col-sm-4 control-label" })
+
+                            <div class="input-group date col-sm-5" >
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+                        <!-- /.form group -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Bank, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-3">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Amount, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ReceiveDate, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Amount, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8">
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-4 col-sm-8">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-primary" id="btn-create">
+                                <i class="fa fa-floppy-o"></i> Create
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

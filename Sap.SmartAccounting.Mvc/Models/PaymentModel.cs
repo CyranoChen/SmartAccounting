@@ -25,7 +25,7 @@ namespace Sap.SmartAccounting.Mvc.Models
 
         public int ID { get; set; }
 
-        [Display(Name = "No in B1")]
+        [Display(Name = "No. in B1")]
         public string B1Id { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]

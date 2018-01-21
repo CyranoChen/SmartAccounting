@@ -44,8 +44,8 @@ namespace Sap.SmartAccounting.Mvc.Entities
         [DbColumn("Status")]
         public PaymentStatusEnum Status { get; set; }
 
-        [DbColumn("CreateDate")]
-        public DateTime CreateDate { get; set; }
+        [DbColumn("CreateTime")]
+        public DateTime CreateTime { get; set; }
 
         [DbColumn("IsActive")]
         public bool IsActive { get; set; }

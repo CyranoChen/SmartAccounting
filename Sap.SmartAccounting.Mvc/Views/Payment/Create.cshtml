@@ -11,14 +11,15 @@
     @*<script src="~/Scripts/datepicker/bootstrap-datepicker.js"></script>*@
     @Scripts.Render("~/bundles/jqueryval")
 
-    @*<script type="text/javascript">
+    <script type="text/javascript">
         $(function () {
-            $("#MenuDate").datepicker({
-                autoclose: true,
-                todayHighlight: true
+            $("#btn-create").click(function () {
+                if ($("#form-create").valid()) {
+                    document.forms["form-create"].submit();
+                }
             });
         });
-    </script>*@
+    </script>
 }
 
 <!-- Content Wrapper. Contains page content -->
@@ -47,36 +48,54 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                @using (Html.BeginForm("Create", "Payment", FormMethod.Post, new { id = "form-payment", @class = "form-horizontal" }))
+                @using (Html.BeginForm("Create", "Payment", FormMethod.Post, new { id = "form-create", @class = "form-horizontal" }))
                 {
                     <div class="box-body">
                         <!-- Date -->
                         <div class="form-group">
                             @Html.LabelFor(m => m.Company, new { @class = "col-sm-4 control-label" })
-
-                            <div class="input-group date col-sm-5" >
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(m => m.Company, new { @class = "form-control", @placeholder = "ex: Leather Inc." })
                             </div>
                             <!-- /.input group -->
                         </div>
                         <!-- /.form group -->
                         <div class="form-group">
                             @Html.LabelFor(m => m.Bank, new { @class = "col-sm-4 control-label" })
-                            <div class="col-sm-3">
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(m => m.Bank, new { @class = "form-control", @placeholder = "ex: BOC.USD" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.Amount, new { @class = "col-sm-4 control-label" })
                             <div class="col-sm-8">
+                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "ex: 1000.00" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.ReceiveDate, new { @class = "col-sm-4 control-label" })
-                            <div class="col-sm-8">
+                            <div class="col-sm-8 input-group" style="margin: 0 15px">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.TextBoxFor(m => m.ReceiveDate, new
+                                {
+                                    @class = "form-control",
+                                    @data_inputmask = "'alias': 'dd/mm/yyyy'",
+                                    @data_mask = "data-mask"
+                                })
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Amount, new { @class = "col-sm-4 control-label" })
+                            @Html.LabelFor(m => m.Reference, new { @class = "col-sm-4 control-label" })
                             <div class="col-sm-8">
+                                @Html.TextBoxFor(m => m.Reference, new { @class = "form-control", @placeholder = "ex: Expense" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Account, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(m => m.Account, new { @class = "form-control", @placeholder = "Fill by Smart Accouting" })
                             </div>
                         </div>
                         <div class="col-sm-offset-4 col-sm-8">
@@ -87,10 +106,11 @@
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="col-sm-offset-4 col-sm-8">
                             <button type="button" class="btn btn-primary" id="btn-create">
                                 <i class="fa fa-floppy-o"></i> Create
                             </button>
+                            <a href="@Url.Action("Index", "Payment")" class="btn btn-default">Back</a>
                         </div>
                     </div>
                 }

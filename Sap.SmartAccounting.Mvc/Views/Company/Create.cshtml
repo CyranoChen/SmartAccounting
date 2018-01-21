@@ -1,0 +1,85 @@
+﻿@model Sap.SmartAccounting.Mvc.Models.CompanyDto
+@{
+    ViewBag.Title = "Preset Company Information";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script type="text/javascript">
+        $(function () {
+            $("#btn-create").click(function () {
+                if ($("#form-create").valid()) {
+                    document.forms["form-create"].submit();
+                }
+            });
+        });
+    </script>
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            <b><i class="fa fa-calendar-minus-o"></i> Preset Company Information</b>
+            <small></small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Console</a></li>
+            <li><a href="#">Setting</a></li>
+            <li class="active">Company</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-info-circle"></i> Add NEW Company Instance
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                @using (Html.BeginForm("Create", "Company", FormMethod.Post, new { id = "form-create", @class = "form-horizontal" }))
+                {
+                    <div class="box-body">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CompanyCode, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(m => m.CompanyCode, new { @class = "form-control", @placeholder = "ex: 103" })
+                            </div>
+                        </div>
+                        <!-- /.form group -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CompanyName, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "ex: Leather Inc." })
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-4 col-sm-8">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <button type="button" class="btn btn-primary" id="btn-create">
+                                <i class="fa fa-floppy-o"></i> Create
+                            </button>
+                            <a href="@Url.Action("Index", "Company")" class="btn btn-default">Back</a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Entities\Company.cs" />
@@ -138,7 +139,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SettingModels.cs" />
     <Compile Include="Models\MatchingModels.cs" />
+    <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -514,10 +517,11 @@
     <Content Include="Views\Shared\_SideBarPartial.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Payment\Create.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Company\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Company\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

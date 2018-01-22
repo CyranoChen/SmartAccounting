@@ -13,9 +13,9 @@ namespace Sap.SmartAccounting.Mvc.Models
         public static MapperConfiguration ConfigMapper()
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Payment, PaymentDto>()
-                .ForMember(d => d.Company, opt => opt.MapFrom(s => s.CompanyName))
-                .ForMember(d => d.Bank, opt => opt.MapFrom(s => s.BankName))
-                .ForMember(d => d.Account, opt => opt.MapFrom(s => s.AccountName))
+                .ForMember(d => d.Company, opt => opt.MapFrom(s => $"{s.CompanyName} ({s.CompanyCode})"))
+                .ForMember(d => d.Bank, opt => opt.MapFrom(s => $"{s.BankName} ({s.BankCode})"))
+                .ForMember(d => d.Account, opt => opt.MapFrom(s => $"{s.AccountName} ({s.AccountCode})"))
             );
 
             return config;
@@ -48,7 +48,10 @@ namespace Sap.SmartAccounting.Mvc.Models
         [Display(Name = "Amount")]
         public double Amount { get; set; }
 
+        [Required(ErrorMessage = "{0} is required")]
         [Display(Name = "Account")]
+        public int AccountId { get; set; }
+
         public string Account { get; set; }
 
         public PaymentStatusEnum Status { get; set; }

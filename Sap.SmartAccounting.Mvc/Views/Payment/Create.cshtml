@@ -1,19 +1,30 @@
-﻿@model Sap.SmartAccounting.Mvc.Models.PaymentDto
+﻿@using Sap.SmartAccounting.Core
+@using Sap.SmartAccounting.Mvc.Entities
+@using Sap.SmartAccounting.Mvc.Models
+@model Sap.SmartAccounting.Mvc.Models.PaymentDto
 @{
     ViewBag.Title = "Add Test Payment Instance Manually";
+
+    var companies = Company.Cache.CompanyListActive.MapToList<Company, CompanyDto>().ToList();
+    var accounts = Account.Cache.AccountListActive.MapToList<Account, AccountDto>().ToList();
 }
 
 @section Styles {
-    @Styles.Render("~/Content/css/datepicker")
+    @Styles.Render("~/Content/datepicker")
+    @Styles.Render("~/Content/select2")
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap-datepicker")
+    @Scripts.Render("~/bundles/select2")
 
     <script type="text/javascript">
         $(function () {
-            $("#ReceiveDate").datepicker({
+            $(".select2-company").select2();
+            $(".select2-account").select2();
+
+            $(".datepicker-receivedate").datepicker({
                 autoclose: true,
                 todayHighlight: true
             });
@@ -56,15 +67,26 @@
                 @using (Html.BeginForm("Create", "Payment", FormMethod.Post, new { id = "form-create", @class = "form-horizontal" }))
                 {
                     <div class="box-body">
-                        <!-- Date -->
                         <div class="form-group">
                             @Html.LabelFor(m => m.Company, new { @class = "col-sm-4 control-label" })
                             <div class="col-sm-8">
-                                @Html.TextBoxFor(m => m.Company, new { @class = "form-control", @placeholder = "ex: Leather Inc." })
+                                @if (companies.Count > 0)
+                                {
+                                    <select class="form-control select2-company" id="Company" name="Company" style="width: 100%;">
+                                        <option value="">(Add NEW Company)</option>
+                                        @foreach (var c in companies)
+                                        {
+                                            <option value="@c.ID">@c.CompanyName (@c.CompanyCode)</option>
+                                        }
+                                    </select>
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(m => m.Company, new { @class = "form-control", @placeholder = "ex: Leather Inc." })
+                                }
                             </div>
-                            <!-- /.input group -->
                         </div>
-                        <!-- /.form group -->
+                        <!-- /.form-group -->
                         <div class="form-group">
                             @Html.LabelFor(m => m.Bank, new { @class = "col-sm-4 control-label" })
                             <div class="col-sm-8">
@@ -84,7 +106,7 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 <input type="text" value="@(DateTime.Today.ToString("MM/dd/yyyy"))"
-                                       class="form-control" id="ReceiveDate" name="ReceiveDate">
+                                       class="form-control datepicker-receivedate" id="ReceiveDate" name="ReceiveDate">
                             </div>
                         </div>
                         <div class="form-group">
@@ -94,11 +116,30 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Account, new { @class = "col-sm-4 control-label" })
-                            <div class="col-sm-8">
-                                @Html.TextBoxFor(m => m.Account, new { @class = "form-control", @placeholder = "Fill by Smart Accouting" })
+                            @Html.LabelFor(m => m.AccountId, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8 input-group" style="padding: 0 15px">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-info">Role</button>
+                                </div>
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-danger">Data</button>
+                                </div>
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default">ML</button>
+                                </div>
+
+                                @if (accounts.Count > 0)
+                                {
+                                    <select class="form-control select2-account" id="AccountId" name="AccountId">
+                                        @foreach (var a in accounts)
+                                        {
+                                            <option value="@a.ID">@a.AccountName (@a.AccountCode)</option>
+                                        }
+                                    </select>
+                                }
                             </div>
                         </div>
+                        <!-- /.form-group -->
                         <div class="col-sm-offset-4 col-sm-8">
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary()

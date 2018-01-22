@@ -12,7 +12,7 @@ namespace Sap.SmartAccounting.Mvc.Controllers
     {
         private readonly IRepository _repo = new Repository();
 
-        // GET: Account
+        // GET: AccountId
         public ActionResult Index()
         {
             var model = new SettingModels.AccountListDto();
@@ -27,19 +27,19 @@ namespace Sap.SmartAccounting.Mvc.Controllers
             return View(model);
         }
 
-        // GET: Account/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        //// GET: AccountId/Details/5
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
 
-        // GET: Account/Create
+        // GET: AccountId/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Account/Create
+        // POST: AccountId/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(AccountDto model)
@@ -74,48 +74,48 @@ namespace Sap.SmartAccounting.Mvc.Controllers
             return View(model);
         }
 
-        // GET: Account/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        //// GET: AccountId/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: Account/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //// POST: AccountId/Edit/5
+        //[HttpPost]
+        //public ActionResult Edit(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
-        // GET: Account/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //// GET: AccountId/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: Account/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //// POST: AccountId/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

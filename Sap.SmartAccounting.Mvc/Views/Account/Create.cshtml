@@ -1,6 +1,6 @@
 ﻿@model Sap.SmartAccounting.Mvc.Models.AccountDto
 @{
-    ViewBag.Title = "Preset Account Subject";
+    ViewBag.Title = "Preset AccountId Subject";
 }
 
 @section Scripts {
@@ -49,8 +49,8 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.IsIncoming, new {@class = "col-sm-4 control-label"})
                             <div class="col-sm-8">
-                                @Html.RadioButtonFor(m => m.IsIncoming, true) IN
-                                @Html.RadioButtonFor(m => m.IsIncoming, false) OUT
+                                @Html.RadioButtonFor(m => m.IsIncoming, true) INCOMING
+                                @Html.RadioButtonFor(m => m.IsIncoming, false) OUTCOMING
                             </div>
                         </div>
                         <div class="form-group">

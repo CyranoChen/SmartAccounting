@@ -12,15 +12,15 @@ namespace Sap.SmartAccounting.Mvc.Models
         public string B1Id { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
-        [Display(Name = "Account Code")]
+        [Display(Name = "AccountId Code")]
         public string AccountCode { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
-        [Display(Name = "Account Name")]
+        [Display(Name = "AccountId Name")]
         public string AccountName { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
-        [Display(Name = "Incoming / Outcoming")]
+        [Display(Name = "Capital flows")]
         public bool IsIncoming { get; set; }
 
         #endregion

@@ -30,11 +30,11 @@ namespace Sap.SmartAccounting.Mvc.Controllers
             return View(model);
         }
 
-        // GET: Payment/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        //// GET: Payment/Details/5
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
 
         // GET: Payment/Create
         public ActionResult Create()
@@ -51,6 +51,9 @@ namespace Sap.SmartAccounting.Mvc.Controllers
             {
                 try
                 {
+                    var account = Entities.Account.Cache.Load(model.AccountId);
+                    if (account == null) { throw new  Exception("The selected account is invaild");}
+
                     var payment = new Payment()
                     {
                         B1Id = string.Empty,
@@ -61,13 +64,24 @@ namespace Sap.SmartAccounting.Mvc.Controllers
                         Amount = model.Amount,
                         ReceiveDate = model.ReceiveDate,
                         Reference = model.Reference,
-                        AccountId = 0,
-                        AccountCode = string.Empty,
-                        AccountName = model.Account,
+                        AccountId = account.ID,
+                        AccountCode = account.AccountCode,
+                        AccountName = account.AccountName,
                         Status = PaymentStatusEnum.ToBePost,
                         CreateTime = DateTime.Now,
                         IsActive = true
                     };
+
+                    if (int.TryParse(model.Company, out var tmpId))
+                    {
+                        var company = Company.Cache.Load(tmpId);
+
+                        if (company != null)
+                        {
+                            payment.CompanyCode = company.CompanyCode;
+                            payment.CompanyName = company.CompanyName;
+                        }
+                    }
 
                     _repo.Insert(payment);
 
@@ -83,48 +97,48 @@ namespace Sap.SmartAccounting.Mvc.Controllers
             return View();
         }
 
-        // GET: Payment/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        //// GET: Payment/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: Payment/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //// POST: Payment/Edit/5
+        //[HttpPost]
+        //public ActionResult Edit(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
-        // GET: Payment/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //// GET: Payment/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: Payment/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //// POST: Payment/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

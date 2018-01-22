@@ -19,6 +19,8 @@ namespace Sap.SmartAccounting.Mvc.Models
         [Display(Name = "Company Name")]
         public string CompanyName { get; set; }
 
+        public string CompanyDisplay { get; set; }
+
         #endregion
 
     }

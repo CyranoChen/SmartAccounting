@@ -134,6 +134,8 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Config.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\SettingModels.cs" />
     <Compile Include="Models\MatchingModels.cs" />
@@ -430,6 +433,7 @@
     <Content Include="Content\bootstrap-datepicker3.css.map" />
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -677,6 +681,7 @@
     <Content Include="Views\Company\Create.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

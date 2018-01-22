@@ -9,8 +9,8 @@
     <script src="~/Scripts/Datatables/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/Datatables/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(function() {
-            $("#tbl-payment").DataTable({
+        $(function () {
+            $("#tbl-datatable").DataTable({
                 "paging": true,
                 "lengthChange": false,
                 "searching": true,
@@ -42,7 +42,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">
-                        <table id="tbl-payment" class="table table-bordered table-striped">
+                        <table id="tbl-datatable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>B1Id</th>
@@ -69,8 +69,13 @@
                                             <td>@m.Account</td>
                                             <td>@m.Status</td>
                                             <td>
-                                                <button type="button" class="btn btn-info btn-xs" id="@m.ID">
+                                                <button type="button" class="btn btn-info btn-xs" disabled="disabled">
                                                     <i class="fa fa-refresh"></i> detail
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-xs"
+                                                        onclick="confirm('IMPORTANT: delete payment id(@m.ID)?');
+                                                        window.location.href = '@Url.Action("Delete", "Payment", new {id = m.ID})';">
+                                                    <i class="fa fa-remove"></i> delete
                                                 </button>
                                             </td>
                                         </tr>

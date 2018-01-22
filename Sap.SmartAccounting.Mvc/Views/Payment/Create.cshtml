@@ -76,7 +76,7 @@
                                         <option value="">(Add NEW Company)</option>
                                         @foreach (var c in companies)
                                         {
-                                            <option value="@c.ID">@c.CompanyName (@c.CompanyCode)</option>
+                                            <option value="@c.ID">@c.CompanyDisplay</option>
                                         }
                                     </select>
                                 }
@@ -133,7 +133,7 @@
                                     <select class="form-control select2-account" id="AccountId" name="AccountId">
                                         @foreach (var a in accounts)
                                         {
-                                            <option value="@a.ID">@a.AccountName (@a.AccountCode)</option>
+                                            <option value="@a.ID">@a.AccountDisplay</option>
                                         }
                                     </select>
                                 }

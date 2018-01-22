@@ -13,5 +13,10 @@ namespace Sap.SmartAccounting.Mvc.Models
         {
             public List<AccountDto> Accounts { get; set; }
         }
+
+        public class RoleListDto
+        {
+            public List<RoleDto> Roles { get; set; }
+        }
     }
 }

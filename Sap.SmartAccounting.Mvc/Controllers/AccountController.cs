@@ -96,26 +96,29 @@ namespace Sap.SmartAccounting.Mvc.Controllers
         //    }
         //}
 
-        //// GET: AccountId/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
+        // GET: AccountId/Delete/5
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                var account = _repo.Single<Account>(id);
 
-        //// POST: AccountId/Delete/5
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
+                if (account != null)
+                {
+                    account.IsActive = false;
 
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+                    _repo.Update(account);
+
+                    Account.Cache.RefreshCache();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return RedirectToAction("Index", "Account");
+        }
     }
 }

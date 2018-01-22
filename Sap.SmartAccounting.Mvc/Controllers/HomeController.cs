@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Sap.SmartAccounting.Mvc.Controllers
 {
@@ -11,6 +7,15 @@ namespace Sap.SmartAccounting.Mvc.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        // GET: Home/Refresh
+        public ActionResult Refresh()
+        {
+            Entities.Company.Cache.RefreshCache();
+            Entities.Account.Cache.RefreshCache();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

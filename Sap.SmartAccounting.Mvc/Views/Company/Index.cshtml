@@ -10,7 +10,7 @@
     <script src="~/Scripts/Datatables/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            $("#tbl-company").DataTable({
+            $("#tbl-datatable").DataTable({
                 "paging": true,
                 "lengthChange": false,
                 "searching": false,
@@ -52,7 +52,7 @@
                             </div>
                             <!-- /.box-tools -->
                         </div>
-                        <table id="tbl-company" class="table table-bordered table-striped">
+                        <table id="tbl-datatable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>B1Id</th>
@@ -71,7 +71,9 @@
                                             <td>@m.CompanyCode</td>
                                             <td>@m.CompanyName</td>
                                             <td>
-                                                <button type="button" class="btn btn-danger btn-xs" id="@m.ID">
+                                                <button type="button" class="btn btn-danger btn-xs"
+                                                        onclick="confirm('IMPORTANT: delete @m.CompanyName?');
+                                                        window.location.href = '@Url.Action("Delete", "Company", new {id = m.ID})';">
                                                     <i class="fa fa-remove"></i> delete
                                                 </button>
                                             </td>

@@ -19,6 +19,8 @@ namespace Sap.SmartAccounting.Mvc.Models
         [Display(Name = "AccountId Name")]
         public string AccountName { get; set; }
 
+        public string AccountDisplay { get; set; }
+
         [Required(ErrorMessage = "{0} is required")]
         [Display(Name = "Capital flows")]
         public bool IsIncoming { get; set; }

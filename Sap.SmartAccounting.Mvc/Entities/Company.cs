@@ -8,6 +8,11 @@ namespace Sap.SmartAccounting.Mvc.Entities
     [DbSchema("Accounting_Company", Sort = "CompanyCode")]
     public class Company : Entity<int>
     {
+        public override void Inital()
+        {
+            CompanyDisplay = $"{CompanyName} ({CompanyCode})";
+        }
+
         #region Members and Properties
 
         [DbColumn("B1Id")]
@@ -18,6 +23,8 @@ namespace Sap.SmartAccounting.Mvc.Entities
 
         [DbColumn("CompanyName")]
         public string CompanyName { get; set; }
+
+        public string CompanyDisplay { get; set; }
 
         [DbColumn("CreateTime")]
         public DateTime CreateTime { get; set; }

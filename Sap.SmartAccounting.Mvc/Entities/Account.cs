@@ -8,6 +8,11 @@ namespace Sap.SmartAccounting.Mvc.Entities
     [DbSchema("Accounting_Account", Sort = "AccountCode")]
     public class Account : Entity<int>
     {
+        public override void Inital()
+        {
+            AccountDisplay = $"{AccountName} ({AccountCode})";
+        }
+
         #region Members and Properties
 
         [DbColumn("B1Id")]
@@ -18,6 +23,8 @@ namespace Sap.SmartAccounting.Mvc.Entities
 
         [DbColumn("AccountName")]
         public string AccountName { get; set; }
+
+        public string AccountDisplay { get; set; }
 
         [DbColumn("IsIncoming")]
         public bool IsIncoming { get; set; }

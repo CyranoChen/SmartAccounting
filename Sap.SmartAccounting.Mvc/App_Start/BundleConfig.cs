@@ -11,13 +11,17 @@ namespace Sap.SmartAccounting.Mvc
                 "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                "~/Scripts/jquery.validate*"));
+                "~/Scripts/jquery.validate.min.js",
+                "~/Scripts/jquery.validate.unobtrusive.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.js"));
+                "~/Scripts/bootstrap.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-datepicker").Include(
+                "~/Scripts/bootstrap-datepicker.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/adminlte").Include(
                 "~/admin-lte/js/adminlte.min.js"));
@@ -29,6 +33,9 @@ namespace Sap.SmartAccounting.Mvc
                 "~/admin-lte/css/AdminLTE.min.css",
                 "~/admin-lte/css/skins/_all-skins.min.css",
                 "~/Content/Site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/datepicker").Include(
+                "~/Content/bootstrap-datepicker3.min.css"));
         }
     }
 }

@@ -8,5 +8,10 @@ namespace Sap.SmartAccounting.Mvc.Models
         {
             public List<CompanyDto> Companies { get; set; }
         }
+
+        public class AccountListDto
+        {
+            public List<AccountDto> Accounts { get; set; }
+        }
     }
 }

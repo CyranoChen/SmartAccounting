@@ -8,58 +8,59 @@ using Sap.SmartAccounting.Mvc.Models;
 
 namespace Sap.SmartAccounting.Mvc.Controllers
 {
-    public class CompanyController : Controller
+    public class AccountController : Controller
     {
         private readonly IRepository _repo = new Repository();
 
-        // GET: Company
+        // GET: Account
         public ActionResult Index()
         {
-            var model = new SettingModels.CompanyListDto();
+            var model = new SettingModels.AccountListDto();
 
-            var list = Entities.Company.Cache.CompanyListActive;
+            var list = Entities.Account.Cache.AccountListActive;
 
             if (list.Count > 0)
             {
-                model.Companies = list.MapToList<Company, CompanyDto>().ToList();
+                model.Accounts = list.MapToList<Account, AccountDto>().ToList();
             }
 
             return View(model);
         }
 
-        // GET: Company/Details/5
+        // GET: Account/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Company/Create
+        // GET: Account/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Company/Create
+        // POST: Account/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CompanyDto model)
+        public ActionResult Create(AccountDto model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var company = new Company()
+                    var account = new Account
                     {
                         B1Id = string.Empty,
-                        CompanyCode = model.CompanyCode,
-                        CompanyName = model.CompanyName,
+                        AccountCode = model.AccountCode,
+                        AccountName = model.AccountName,
+                        IsIncoming = model.IsIncoming,
                         CreateTime = DateTime.Now,
                         IsActive = true
                     };
 
-                    _repo.Insert(company);
+                    _repo.Insert(account);
 
-                    Entities.Company.Cache.RefreshCache();
+                    Entities.Account.Cache.RefreshCache();
 
                     return RedirectToAction("Index");
 
@@ -73,13 +74,13 @@ namespace Sap.SmartAccounting.Mvc.Controllers
             return View(model);
         }
 
-        // GET: Company/Edit/5
+        // GET: Account/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Company/Edit/5
+        // POST: Account/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -95,13 +96,13 @@ namespace Sap.SmartAccounting.Mvc.Controllers
             }
         }
 
-        // GET: Company/Delete/5
+        // GET: Account/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Company/Delete/5
+        // POST: Account/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

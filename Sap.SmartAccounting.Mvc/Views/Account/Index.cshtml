@@ -1,4 +1,4 @@
-﻿@model Sap.SmartAccounting.Mvc.Models.MatchingModels.PaymentListDto
+﻿@model Sap.SmartAccounting.Mvc.Models.SettingModels.AccountListDto
 
 @section Styles {
     <link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap.min.css">
@@ -9,11 +9,11 @@
     <script src="~/Scripts/Datatables/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/Datatables/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(function() {
-            $("#tbl-payment").DataTable({
+        $(function () {
+            $("#tbl-company").DataTable({
                 "paging": true,
                 "lengthChange": false,
-                "searching": true,
+                "searching": false,
                 "ordering": true,
                 "info": true,
                 "autoWidth": true
@@ -27,13 +27,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <b><i class="fa fa-user"></i> Historic Payments</b>
+            <b><i class="fa fa-user"></i> Preset Accounts</b>
             <small></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Console</a></li>
-            <li><a href="#">Smart Matching</a></li>
-            <li class="active">History</li>
+            <li><a href="#">Setting</a></li>
+            <li class="active">Account</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -42,35 +42,39 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">
-                        <table id="tbl-payment" class="table table-bordered table-striped">
+                        <div class="mailbox-controls">
+                            <!-- /.btn-group -->
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default"
+                                        onclick="window.location.href = '@Url.Action("Create", "Account")'">
+                                    <i class="fa fa-plus-circle"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <table id="tbl-company" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>B1Id</th>
-                                    <th>Company</th>
-                                    <th>Bank</th>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Account</th>
-                                    <th>Status</th>
+                                    <th>CompanyCode</th>
+                                    <th>CompanyName</th>
+                                    <th>In / Out</th>
                                     <th>Operation</th>
                                 </tr>
                             </thead>
-                            @if (Model.Payments != null && Model.Payments.Count > 0)
+                            @if (Model.Accounts != null && Model.Accounts.Count > 0)
                             {
                                 <tbody>
-                                    @foreach (var m in Model.Payments)
+                                    @foreach (var m in Model.Accounts)
                                     {
                                         <tr>
                                             <td>@m.B1Id</td>
-                                            <td>@m.Company</td>
-                                            <td>@m.Bank</td>
-                                            <td>@m.ReceiveDate</td>
-                                            <td>@m.Amount</td>
-                                            <td>@m.Account</td>
-                                            <td>@m.Status</td>
+                                            <td>@m.AccountCode</td>
+                                            <td>@m.AccountName</td>
+                                            <td>@m.IsIncoming</td>
                                             <td>
-                                                <button type="button" class="btn btn-info btn-xs" id="@m.ID">
-                                                    <i class="fa fa-refresh"></i> detail
+                                                <button type="button" class="btn btn-danger btn-xs" id="@m.ID">
+                                                    <i class="fa fa-remove"></i> delete
                                                 </button>
                                             </td>
                                         </tr>

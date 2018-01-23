@@ -74,29 +74,15 @@ namespace Sap.SmartAccounting.Mvc.Controllers
             return View(model);
         }
 
-        //// GET: AccountId/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
+        // AJAX JsonResult
+        // GET: Account/GetAccountsByAmount?amount=
+        public JsonResult GetAccountsByAmount(double amount)
+        {
+            var list = Entities.Account.Cache.AccountListActive.FindAll(x => x.IsIncoming.Equals(amount > 0));
 
-        //// POST: AccountId/Edit/5
-        //[HttpPost]
-        //public ActionResult Edit(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add update logic here
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
 
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        // GET: AccountId/Delete/5
         public ActionResult Delete(int id)
         {
             try

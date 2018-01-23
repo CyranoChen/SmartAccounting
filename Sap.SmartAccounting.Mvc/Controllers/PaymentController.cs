@@ -52,7 +52,7 @@ namespace Sap.SmartAccounting.Mvc.Controllers
                 try
                 {
                     var account = Entities.Account.Cache.Load(model.AccountId);
-                    if (account == null) { throw new  Exception("The selected account is invaild");}
+                    if (account == null) { throw new Exception("The selected account is invaild"); }
 
                     var payment = new Payment()
                     {
@@ -97,29 +97,16 @@ namespace Sap.SmartAccounting.Mvc.Controllers
             return View();
         }
 
-        //// GET: Payment/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
+        // AJAX JsonResult
+        // GET: Payment/SmartAccountMatching?company=&bank=&amount=
+        public JsonResult SmartAccountMatching(int company, string bank, double amount)
+        {
+            //var list = Entities.Account.Cache.AccountListActive.FindAll(x => x.IsIncoming.Equals(amount > 0));
 
-        //// POST: Payment/Edit/5
-        //[HttpPost]
-        //public ActionResult Edit(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add update logic here
+            return Json(new { Result = "info", Company = company, Bank = bank, Amount = amount, Porbability = "90%", Account = 1}, JsonRequestBehavior.AllowGet);
+        }
 
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
 
-        // GET: Payment/Delete/5
         public ActionResult Delete(int id)
         {
             try

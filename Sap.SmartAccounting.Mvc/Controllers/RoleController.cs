@@ -26,7 +26,7 @@ namespace Sap.SmartAccounting.Mvc.Controllers
                 var mapper = RoleDto.ConfigMapper().CreateMapper();
                 var roles = mapper.Map<IEnumerable<RoleDto>>(list.AsEnumerable()).ToList();
 
-                model.Roles = list.MapToList<Role, RoleDto>().ToList();
+                model.Roles = roles;
             }
 
             return View(model);

@@ -21,6 +21,16 @@ namespace Sap.SmartAccounting.Mvc.Models
 
         public string CompanyDisplay { get; set; }
 
+        [Display(Name = "Incoming Account")]
+        public int IncomingAccountId { get; set; }
+
+        public AccountDto IncomingAccount { get; set; }
+
+        [Display(Name = "Outcoming Account")]
+        public int OutcomingAccountId { get; set; }
+
+        public AccountDto OutcomingAccount { get; set; }
+
         #endregion
 
     }

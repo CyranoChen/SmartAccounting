@@ -1,0 +1,133 @@
+﻿@using Sap.SmartAccounting.Core
+@using Sap.SmartAccounting.Mvc.Entities
+@using Sap.SmartAccounting.Mvc.Models
+@model CompanyDto
+@{
+    ViewBag.Title = "Preset Company Information";
+    var accountsIn = Account.Cache.AccountListActive.FindAll(x => x.IsIncoming)
+        .MapToList<Account, AccountDto>().ToList();
+    var accountsOut = Account.Cache.AccountListActive.FindAll(x => !x.IsIncoming)
+        .MapToList<Account, AccountDto>().ToList();
+}
+
+@section Styles {
+    @Styles.Render("~/Content/select2")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/select2")
+
+    <script type="text/javascript">
+        $(function () {
+            $(".select2-account").select2();
+
+            $("#btn-save").click(function () {
+                if ($("#form-save").valid()) {
+                    document.forms["form-save"].submit();
+                }
+            });
+        });
+    </script>
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            <b><i class="fa fa-calendar-minus-o"></i> Preset Company Information</b>
+            <small></small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Console</a></li>
+            <li><a href="#">Setting</a></li>
+            <li class="active">Company</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-info-circle"></i> Add NEW Company Instance
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                @using (Html.BeginForm("Edit", "Company", FormMethod.Post, new { id = "form-save", @class = "form-horizontal" }))
+                {
+                    <div class="box-body">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CompanyCode, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(m => m.CompanyCode, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CompanyName, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.IncomingAccountId, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8">
+                                @if (accountsIn.Count > 0)
+                                {
+                                    <select class="form-control select2-account" id="IncomingAccountId" name="IncomingAccountId">
+                                        <option value="0">(No Incoming Role)</option>
+                                        @foreach (var a in accountsIn)
+                                        {
+                                            <option value="@a.ID" @(Model.IncomingAccountId.Equals(a.ID) ? "selected=\" selected\"" : string.Empty)>
+                                                @a.AccountDisplay
+                                            </option>
+                                        }
+                                    </select>
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.OutcomingAccountId, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8">
+                                @if (accountsOut.Count > 0)
+                                {
+                                    <select class="form-control select2-account" id="OutcomingAccountId" name="OutcomingAccountId">
+                                        <option value="0">(No Outcoming Role)</option>
+                                        @foreach (var a in accountsOut)
+                                        {
+                                            <option value="@a.ID" @(Model.OutcomingAccountId.Equals(a.ID) ? "selected=\" selected\"" : string.Empty)>
+                                                @a.AccountDisplay
+                                            </option>
+                                        }
+                                    </select>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-4 col-sm-8">
+                            @Html.HiddenFor(m => m.ID)
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <button type="button" class="btn btn-primary" id="btn-save">
+                                <i class="fa fa-floppy-o"></i> Save
+                            </button>
+                            <a href="@Url.Action("Index", "Company")" class="btn btn-default">Back</a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

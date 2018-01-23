@@ -71,9 +71,12 @@
                                             <td>@m.CompanyCode</td>
                                             <td>@m.CompanyName</td>
                                             <td>
+                                                <button type="button" class="btn btn-info btn-xs"
+                                                        onclick="window.location.href = '@Url.Action("Edit", "Company", new {id = m.ID})'">
+                                                    <i class="fa fa-edit"></i> role
+                                                </button>
                                                 <button type="button" class="btn btn-danger btn-xs"
-                                                        onclick="confirm('IMPORTANT: delete @m.CompanyName?');
-                                                        window.location.href = '@Url.Action("Delete", "Company", new {id = m.ID})';">
+                                                        onclick="confirm('IMPORTANT: delete @m.CompanyName?');window.location.href = '@Url.Action("Delete", "Company", new {id = m.ID})';">
                                                     <i class="fa fa-remove"></i> delete
                                                 </button>
                                             </td>

@@ -67,7 +67,7 @@ namespace Sap.SmartAccounting.Mvc.Controllers
                         AccountId = account.ID,
                         AccountCode = account.AccountCode,
                         AccountName = account.AccountName,
-                        Status = PaymentStatusEnum.ToBePost,
+                        Status = PaymentStatusEnum.Posted,
                         CreateTime = DateTime.Now,
                         IsActive = true
                     };

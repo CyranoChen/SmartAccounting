@@ -74,8 +74,8 @@
                                             <td>@m.IsIncoming</td>
                                             <td>
                                                 <button type="button" class="btn btn-danger btn-xs"
-                                                        onclick="confirm('IMPORTANT: delete @m.AccountName?');
-                                                        window.location.href = '@Url.Action("Delete", "Account", new {id = m.ID})';">
+                                                        onclick="if(confirm('IMPORTANT: delete @m.AccountName?')){
+                                                        window.location.href = '@Url.Action("Delete", "Account", new {id = m.ID})';}">
                                                     <i class="fa fa-remove"></i> delete
                                                 </button>
                                             </td>

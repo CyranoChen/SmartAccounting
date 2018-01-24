@@ -47,9 +47,9 @@
                                 <tr>
                                     <th>B1Id</th>
                                     <th>Company</th>
-                                    <th>Bank</th>
                                     <th>Date</th>
                                     <th>Amount</th>
+                                    <th>Reference</th>
                                     <th>Account</th>
                                     <th>Status</th>
                                     <th>Operation</th>
@@ -63,9 +63,9 @@
                                         <tr>
                                             <td>@m.B1Id</td>
                                             <td>@m.Company</td>
-                                            <td>@m.Bank</td>
                                             <td>@m.ReceiveDate.ToString("MM/dd/yyyy")</td>
                                             <td style="text-align: right">@m.Amount.ToString("f2")</td>
+                                            <td>@m.Reference</td>
                                             <td>@m.Account</td>
                                             <td>@m.Status</td>
                                             <td>
@@ -73,8 +73,8 @@
                                                     <i class="fa fa-edit"></i> detail
                                                 </button>
                                                 <button type="button" class="btn btn-danger btn-xs"
-                                                        onclick="confirm('IMPORTANT: delete payment id(@m.ID)?');
-                                                        window.location.href = '@Url.Action("Delete", "Payment", new {id = m.ID})';">
+                                                        onclick="if(confirm('IMPORTANT: delete payment id(@m.ID)?'))
+                                                        {window.location.href = '@Url.Action("Delete", "Payment", new {id = m.ID})';}">
                                                     <i class="fa fa-remove"></i> delete
                                                 </button>
                                             </td>

@@ -6,8 +6,6 @@
         {
             #region Members and Properties
 
-            public int PaymentId { get; set; }
-
             public string PaymentB1Id { get; set; }
 
             public CompanyDto Company { get; set; }
@@ -27,8 +25,6 @@
         {
             #region Members and Properties
 
-            public int PaymentId { get; set; }
-
             public string PaymentB1Id { get; set; }
 
             public ResultTypeEnum ResultType { get; set; }
@@ -36,6 +32,8 @@
             public AccountDto ResultAccount { get; set; }
 
             public double Probability { get; set; }
+
+            public string Remark { get; set; }
 
             #endregion
         }
@@ -45,7 +43,8 @@
             None = 0,
             RoleBase = 1,
             HistoricData = 2,
-            ReferenceMatching = 3
+            ReferenceMatching = 3,
+            Exception = -1
         }
     }
 }

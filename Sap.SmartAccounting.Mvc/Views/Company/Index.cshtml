@@ -76,7 +76,8 @@
                                                     <i class="fa fa-edit"></i> role
                                                 </button>
                                                 <button type="button" class="btn btn-danger btn-xs"
-                                                        onclick="confirm('IMPORTANT: delete @m.CompanyName?');window.location.href = '@Url.Action("Delete", "Company", new {id = m.ID})';">
+                                                        onclick="if(confirm('IMPORTANT: delete @m.CompanyName?'))
+                                                        {window.location.href = '@Url.Action("Delete", "Company", new {id = m.ID})';}">
                                                     <i class="fa fa-remove"></i> delete
                                                 </button>
                                             </td>

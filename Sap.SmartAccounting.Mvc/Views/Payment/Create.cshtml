@@ -67,19 +67,38 @@
                 }
 
                 if ($("#form-create #Amount").val() !== 0) {
-                    $.getJSON("@Url.Action("SmartAccountMatching", "Payment")",
+                    $.getJSON("/api/SmartMatching",
                         {
-                            "company": $("#form-create #Company").val(),
+                            "paymentB1Id": "",
+                            "companyId": $("#form-create #Company").val(),
+                            "companyB1Id": "",
                             "bank": $("#form-create #Bank").val(),
-                            "amount": $("#form-create #Amount").val()
+                            "amount": $("#form-create #Amount").val(),
+                            "reference": $("#form-create #Reference").val()
                         },
                         function (data, status) {
                         if (status === "success" && data != null) {
                             alert(JSON.stringify(data));
-                            $("#btn-guess").text(data.Porbability).removeClass("btn-default")
-                                .addClass("btn-" + data.Result);
-                            alert(data.Account);
-                            //$(".select2-account").val(data.Account);
+                            if (data.resultType > 0) {
+                                var btnClass = "default";
+                                switch (data.resultType) {
+                                case (1):
+                                    btnClass = "success";
+                                    break;
+                                case (2):
+                                    btnClass = "primary";
+                                    break;
+                                case (3):
+                                    btnClass = "info";
+                                    break;
+                                default:
+                                    btnClass = "default";
+                                }
+
+                                $("#btn-guess").text((data.probability*100).toString()+"%").removeClass("btn-default")
+                                    .addClass("btn-" + btnClass);
+                                $(".select2-account").select2("val", data.resultAccount.id.toString());
+                            }
                         } else {
                             alert("Failed on calling api service of GetAccountsByAmount");
                         }
@@ -147,12 +166,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Amount, new { @class = "col-sm-4 control-label" })
-                            <div class="col-sm-8">
-                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "ex: 1000.00" })
-                            </div>
-                        </div>
-                        <div class="form-group">
                             @Html.LabelFor(m => m.ReceiveDate, new { @class = "col-sm-4 control-label" })
                             <div class="col-sm-8 input-group" style="padding: 0 15px">
                                 <div class="input-group-addon">
@@ -160,6 +173,12 @@
                                 </div>
                                 <input type="text" value="@(DateTime.Today.ToString("MM/dd/yyyy"))"
                                        class="form-control datepicker-receivedate" id="ReceiveDate" name="ReceiveDate">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Amount, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "ex: 1000.00" })
                             </div>
                         </div>
                         <div class="form-group">

@@ -67,14 +67,14 @@
                 }
 
                 if ($("#form-create #Amount").val() !== 0) {
-                    $.getJSON("/api/SmartMatching",
+                    $.post("/api/SmartMatching",
                         {
-                            "paymentB1Id": "",
-                            "companyId": $("#form-create #Company").val(),
-                            "companyB1Id": "",
-                            "bank": $("#form-create #Bank").val(),
-                            "amount": $("#form-create #Amount").val(),
-                            "reference": $("#form-create #Reference").val()
+                            "PaymentB1Id": "",
+                            "CompanyId": $("#form-create #Company").val(),
+                            "CompanyB1Id": "",
+                            "Bank": $("#form-create #Bank").val(),
+                            "Amount": $("#form-create #Amount").val(),
+                            "Reference": $("#form-create #Reference").val()
                         },
                         function (data, status) {
                         if (status === "success" && data != null) {
@@ -95,9 +95,13 @@
                                     btnClass = "default";
                                 }
 
-                                $("#btn-guess").text((data.probability*100).toString()+"%").removeClass("btn-default")
+                                $("#btn-guess").text((data.probability * 100).toString() + "%")
+                                    .removeClass("btn-default")
                                     .addClass("btn-" + btnClass);
                                 $(".select2-account").select2("val", data.resultAccount.id.toString());
+                            } else {
+                                $("#btn-guess").text("Guess!").removeClass().addClass("btn btn-default");
+                                $(".select2-account").select2("val", "");
                             }
                         } else {
                             alert("Failed on calling api service of GetAccountsByAmount");

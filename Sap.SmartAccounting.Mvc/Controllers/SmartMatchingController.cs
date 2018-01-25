@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Sap.SmartAccounting.Core;
 using Sap.SmartAccounting.Mvc.Entities;
@@ -16,7 +14,7 @@ namespace Sap.SmartAccounting.Mvc.Controllers
     {
         // GET api/<controller>
         /// <summary>
-        /// Get Smart Account Depended by the Features of Payment
+        /// (obsolete) Get Smart Account Depended by the Features of Payment
         /// </summary>
         /// <param name="paymentB1Id">Id of Payment in Business One</param>
         /// <param name="companyId">Leave empty</param>
@@ -73,8 +71,105 @@ namespace Sap.SmartAccounting.Mvc.Controllers
                     Probability = 0,
                     ResultType = AlgorithmModels.ResultTypeEnum.Exception,
                     Remark = e.Message
-            };
+                };
+            }
         }
+
+        /// <summary>
+        /// Parameter Object of SmartMatching API
+        /// </summary>
+        public class SmartMatchingRequest
+        {
+            #region Members and Properties
+
+            /// <summary>
+            /// Id of Payment in Business One
+            /// </summary>
+            public string PaymentB1Id { get; set; }
+
+            /// <summary>
+            /// Leave empty
+            /// </summary>
+            public int CompanyId { get; set; }
+
+            /// <summary>
+            /// Id of Customers or Supplier in Business One
+            /// </summary>
+            public string CompanyB1Id { get; set; }
+
+            /// <summary>
+            /// Bank Information
+            /// </summary>
+            public string Bank { get; set; }
+
+            /// <summary>
+            /// Amount of Payment
+            /// </summary>
+            public double Amount { get; set; }
+
+            /// <summary>
+            /// Remark
+            /// </summary>
+            public string Reference { get; set; }
+
+            #endregion
+        }
+
+        // POST api/<controller>
+        /// <summary>
+        /// Require Smart Account Depended by the Features of Payment
+        /// </summary>
+        /// <returns>JSON format</returns>
+        /// <exception cref="Exception"></exception>
+        public AlgorithmModels.Result Post(SmartMatchingRequest request)
+        {
+            try
+            {
+                var param = new AlgorithmModels.Parameter
+                {
+                    PaymentB1Id = request.PaymentB1Id,
+                    Company = null,
+                    BankCode = string.Empty,
+                    BankName = request.Bank,
+                    Reference = request.Reference,
+                    Amount = request.Amount
+                };
+
+                if (request.CompanyId <= 0 && string.IsNullOrEmpty(request.CompanyB1Id))
+                { throw new Exception("Company Information is required"); }
+
+                if (request.CompanyId <= 0 && !string.IsNullOrEmpty(request.CompanyB1Id))
+                {
+                    if (Company.Cache.CompanyListActive.Exists(x => x.B1Id.Equals(request.CompanyB1Id)))
+                    {
+                        param.Company = Company.Cache.CompanyListActive
+                            .Find(x => x.B1Id.Equals(param.Company.B1Id)).MapTo<Company, CompanyDto>();
+                    }
+                    else
+                    {
+                        param.Company = null;
+                    }
+                }
+                else
+                {
+                    param.Company = Company.Cache.Load(request.CompanyId).MapTo<Company, CompanyDto>();
+                }
+
+                var result = AlgorithmV1.SmartMatching(param);
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                return new AlgorithmModels.Result
+                {
+                    ResultAccount = null,
+                    Probability = 0,
+                    ResultType = AlgorithmModels.ResultTypeEnum.Exception,
+                    Remark = e.Message
+                };
+            }
+        }
+
     }
-}
 }

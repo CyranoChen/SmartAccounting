@@ -9,6 +9,7 @@ namespace Sap.SmartAccounting.Mvc.Entities
     public class Role : Entity<int>
     {
         #region Members and Properties
+
         [DbColumn("CompanyId")]
         public int CompanyId { get; set; }
 

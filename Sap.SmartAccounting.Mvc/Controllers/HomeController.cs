@@ -12,8 +12,11 @@ namespace Sap.SmartAccounting.Mvc.Controllers
         // GET: Home/Refresh
         public ActionResult Refresh()
         {
+            Entities.ConfigGlobal.Refresh();
+
             Entities.Company.Cache.RefreshCache();
             Entities.Account.Cache.RefreshCache();
+            Entities.Role.Cache.RefreshCache();
 
             return RedirectToAction("Index", "Home");
         }

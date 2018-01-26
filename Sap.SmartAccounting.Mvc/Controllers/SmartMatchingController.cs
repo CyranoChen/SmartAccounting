@@ -18,13 +18,13 @@ namespace Sap.SmartAccounting.Mvc.Controllers
         /// </summary>
         /// <param name="paymentB1Id">Id of Payment in Business One</param>
         /// <param name="companyId">Leave empty</param>
-        /// <param name="companyB1Id">Id of Customers or Supplier in Business One</param>
+        /// <param name="companyCode">Id of Customers or Supplier in Business One</param>
         /// <param name="bank">Bank Information</param>
         /// <param name="amount">Amount of Payment</param>
         /// <param name="reference">Remark</param>
         /// <returns>JSON format</returns>
         /// <exception cref="Exception"></exception>
-        public AlgorithmModels.Result Get(string paymentB1Id, int companyId, string companyB1Id,
+        public AlgorithmModels.Result Get(string paymentB1Id, int companyId, string companyCode,
             string bank, double amount, string reference)
         {
             try
@@ -39,15 +39,15 @@ namespace Sap.SmartAccounting.Mvc.Controllers
                     Amount = amount
                 };
 
-                if (companyId <= 0 && string.IsNullOrEmpty(companyB1Id))
+                if (companyId <= 0 && string.IsNullOrEmpty(companyCode))
                 { throw new Exception("Company Information is required"); }
 
-                if (companyId <= 0 && !string.IsNullOrEmpty(companyB1Id))
+                if (companyId <= 0 && !string.IsNullOrEmpty(companyCode))
                 {
-                    if (Company.Cache.CompanyListActive.Exists(x => x.B1Id.Equals(companyB1Id)))
+                    if (Company.Cache.CompanyListActive.Exists(x => x.CompanyCode.Equals(companyCode)))
                     {
                         param.Company = Company.Cache.CompanyListActive
-                            .Find(x => x.B1Id.Equals(param.Company.B1Id)).MapTo<Company, CompanyDto>();
+                            .Find(x => x.CompanyCode.Equals(param.Company.CompanyCode)).MapTo<Company, CompanyDto>();
                     }
                     else
                     {
@@ -93,9 +93,9 @@ namespace Sap.SmartAccounting.Mvc.Controllers
             public int CompanyId { get; set; }
 
             /// <summary>
-            /// Id of Customers or Supplier in Business One
+            /// Code of Customers or Supplier in Business One
             /// </summary>
-            public string CompanyB1Id { get; set; }
+            public string CompanyCode { get; set; }
 
             /// <summary>
             /// Bank Information
@@ -135,15 +135,15 @@ namespace Sap.SmartAccounting.Mvc.Controllers
                     Amount = request.Amount
                 };
 
-                if (request.CompanyId <= 0 && string.IsNullOrEmpty(request.CompanyB1Id))
+                if (request.CompanyId <= 0 && string.IsNullOrEmpty(request.CompanyCode))
                 { throw new Exception("Company Information is required"); }
 
-                if (request.CompanyId <= 0 && !string.IsNullOrEmpty(request.CompanyB1Id))
+                if (request.CompanyId <= 0 && !string.IsNullOrEmpty(request.CompanyCode))
                 {
-                    if (Company.Cache.CompanyListActive.Exists(x => x.B1Id.Equals(request.CompanyB1Id)))
+                    if (Company.Cache.CompanyListActive.Exists(x => x.CompanyCode.Equals(request.CompanyCode)))
                     {
                         param.Company = Company.Cache.CompanyListActive
-                            .Find(x => x.B1Id.Equals(param.Company.B1Id)).MapTo<Company, CompanyDto>();
+                            .Find(x => x.CompanyCode.Equals(param.Company.CompanyCode)).MapTo<Company, CompanyDto>();
                     }
                     else
                     {

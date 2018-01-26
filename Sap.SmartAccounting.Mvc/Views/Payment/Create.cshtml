@@ -35,7 +35,8 @@
                                                 .text(entry.AccountDisplay));
                                         });
 
-                                    $(".select2-account").val("");
+                                    $(".select2-account").select2();
+                                    $(".select2-account").select2("val","0");
                                 }
                             } else {
                                 alert("Failed on calling api service of GetAccountsByAmount");
@@ -71,7 +72,7 @@
                         {
                             "PaymentB1Id": "",
                             "CompanyId": $("#form-create #Company").val(),
-                            "CompanyB1Id": "",
+                            "CompanyCode": "",
                             "Bank": $("#form-create #Bank").val(),
                             "Amount": $("#form-create #Amount").val(),
                             "Reference": $("#form-create #Reference").val()
@@ -96,12 +97,12 @@
                                 }
 
                                 $("#btn-guess").text((data.probability * 100).toString() + "%")
-                                    .removeClass("btn-default")
-                                    .addClass("btn-" + btnClass);
-                                $(".select2-account").select2("val", data.resultAccount.id.toString());
+                                    .removeClass()
+                                    .addClass("btn btn-" + btnClass);
+                                $(".select2-account").val(data.resultAccount.id.toString()).trigger("change");
                             } else {
                                 $("#btn-guess").text("Guess!").removeClass().addClass("btn btn-default");
-                                $(".select2-account").select2("val", "");
+                                $(".select2-account").select2("val", "0");
                             }
                         } else {
                             alert("Failed on calling api service of GetAccountsByAmount");

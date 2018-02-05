@@ -12,12 +12,6 @@ namespace Sap.SmartAccounting.Mvc.Services.Tests
     public class AlgorithmV1Tests
     {
         [TestMethod()]
-        public void SmartMatchingTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
         public void LinqForSubtotalTest()
         {
             var list = new List<Student>

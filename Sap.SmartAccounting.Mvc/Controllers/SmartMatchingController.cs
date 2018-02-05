@@ -143,7 +143,7 @@ namespace Sap.SmartAccounting.Mvc.Controllers
                     if (Company.Cache.CompanyListActive.Exists(x => x.CompanyCode.Equals(request.CompanyCode)))
                     {
                         param.Company = Company.Cache.CompanyListActive
-                            .Find(x => x.CompanyCode.Equals(param.Company.CompanyCode)).MapTo<Company, CompanyDto>();
+                            .Find(x => x.CompanyCode.Equals(request.CompanyCode)).MapTo<Company, CompanyDto>();
                     }
                     else
                     {

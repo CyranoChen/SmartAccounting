@@ -1,6 +1,6 @@
 ﻿using System.Web.Script.Serialization;
 
-namespace Sap.SmartAccounting.Core
+namespace Sap.SmartAccounting.Core.Extension
 {
     public static class JsonExtensions
     {

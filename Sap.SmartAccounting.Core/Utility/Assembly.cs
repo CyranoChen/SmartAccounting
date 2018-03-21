@@ -1,4 +1,4 @@
-﻿namespace Sap.SmartAccounting.Core
+﻿namespace Sap.SmartAccounting.Core.Utility
 {
     public class AssemblyInfo
     {

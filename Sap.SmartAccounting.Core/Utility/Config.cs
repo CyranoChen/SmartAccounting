@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Reflection;
 using Sap.SmartAccounting.Core.Dapper;
 
-namespace Sap.SmartAccounting.Core
+namespace Sap.SmartAccounting.Core.Utility
 {
     [DbSchema("Core_Config", Sort = "ConfigSystem, ConfigKey")]
     public class Config : Dao

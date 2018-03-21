@@ -13,9 +13,7 @@ namespace Sap.SmartAccounting.Core.Extension
         {
             if (para != null)
             {
-                var dp = para as DynamicParameters;
-
-                if (dp != null)
+                if (para is DynamicParameters dp)
                 {
                     return new
                     {

@@ -37,8 +37,10 @@ namespace Sap.SmartAccounting.Core.Logger
             };
 
             // no logging method
-            var dapper = DapperHelper.GetInstance();
-            dapper.Execute(sql, para.ToDapperParameters(), null, ignoreLog: true);
+            using (IDapperHelper dapper = DapperHelper.GetInstance())
+            {
+                dapper.Execute(sql, para.ToDapperParameters(), null, ignoreLog: true);
+            }
         }
 
         protected void Logging(string logger, DateTime createTime, LogLevel level, string message,
@@ -69,8 +71,10 @@ namespace Sap.SmartAccounting.Core.Logger
             };
 
             // no logging method
-            var dapper = DapperHelper.GetInstance();
-            dapper.Execute(sql, para.ToDapperParameters(), null, ignoreLog: true);
+            using (var dapper = DapperHelper.GetInstance())
+            {
+                dapper.Execute(sql, para.ToDapperParameters(), null, ignoreLog: true);
+            }
         }
 
         public static void Clean()

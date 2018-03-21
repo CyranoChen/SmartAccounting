@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Sap.SmartAccounting.Core;
+using Sap.SmartAccounting.Core.Extension;
 using Sap.SmartAccounting.Mvc.Entities;
 using Sap.SmartAccounting.Mvc.Models;
 using Sap.SmartAccounting.Mvc.Services;
